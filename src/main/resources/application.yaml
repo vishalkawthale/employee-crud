@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    password: vishal94
+    url: jdbc:h2:mem:testdb
+    username: root
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      format_sql: true
+    show-sql: true
