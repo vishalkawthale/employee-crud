@@ -6,7 +6,6 @@ import org.springframework.jndi.JndiTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadFactory;
