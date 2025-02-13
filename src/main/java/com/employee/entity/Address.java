@@ -9,10 +9,8 @@ import lombok.*;
 @Entity
 @Builder
 @Data
-@ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

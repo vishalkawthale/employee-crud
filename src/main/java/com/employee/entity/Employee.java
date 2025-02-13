@@ -10,12 +10,9 @@ import java.sql.Timestamp;
 
 @Entity(name = "employee")
 @Builder
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@NoArgsConstructor
+@Data
 public class Employee {
 	@Id
 	@Builder.Default
