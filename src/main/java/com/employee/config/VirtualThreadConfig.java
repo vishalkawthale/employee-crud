@@ -27,7 +27,6 @@ public class VirtualThreadConfig {
     public JndiTemplate jndiTemplate() {
         Properties properties = new Properties();
         properties.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.naming.java.javaURLContextFactory");
-        properties.put(Context.PROVIDER_URL, "java:com/env");
         return new JndiTemplate(properties);
     }
 }

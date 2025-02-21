@@ -97,7 +97,7 @@ public class EmployeeControllerWebMvcTest {
 
         when(employeeService.saveAll(anyList())).thenReturn(employees);
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/employee/saveAll")
+        mockMvc.perform(MockMvcRequestBuilders.post("/employee/saveAll")
                         .contentType("application/json")
                         .content("[{\"firstName\":\"John\",\"lastName\":\"Doe\"},{\"firstName\":\"Jane\",\"lastName\":\"Doe\"}]"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
