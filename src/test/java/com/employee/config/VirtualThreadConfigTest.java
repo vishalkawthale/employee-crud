@@ -1,7 +1,7 @@
 /*
 package com.employee.config;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -17,13 +17,13 @@ public class VirtualThreadConfigTest {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Test
+    @TestDemo
     public void testVirtualThreadExecutorBean() {
         ExecutorService executorService = (ExecutorService) applicationContext.getBean("virtualThreadExecutor");
         assertNotNull(executorService, "The virtualThreadExecutor bean should not be null");
     }
 
-    @Test
+    @TestDemo
     public void testVirtualThreadFactoryBean() {
         ThreadFactory threadFactory = (ThreadFactory) applicationContext.getBean("virtualThreadFactory");
         assertNotNull(threadFactory, "The virtualThreadFactory bean should not be null");

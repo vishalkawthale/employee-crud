@@ -1,19 +1,68 @@
 server:
   port: 8081
 spring:
+  application:
+    name: employee-crud
+  security:
+    user:
+      name: vishal
+      password: 123423
   threads:
     virtual:
       enabled: true
+  data:
+    mongodb:
+      authentication-database: admin
+      host: localhost
+      port: 27017
+      database: student_db
+      username: root
+      password: root
   datasource:
-    password: vishal94
-    url: jdbc:h2:mem:testdb
+    url: jdbc:mysql://localhost:3306/db
     username: root
-    driver-class-name: org.h2.Driver
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
       format_sql: true
     show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus
+          - health
+          - info
+          - env
+          - beans
+          - configprops
+          - loggers
+          - metrics
+
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  health:
+    db:
+      enabled: true
+  info:
+    app:
+      name: Employee CRUD
+      description: Employee CRUD Application
+      version: 1.0.0
+    company:
+      name: Vishal
+      contact:
+        email:

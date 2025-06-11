@@ -1,6 +1,6 @@
 package com.employee.controller;
 
-import com.employee.entity.Employee;
+import com.employee.entity.sql.mysql.Employee;
 import com.employee.service.EmployeeService;
 import com.employee.utils.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;

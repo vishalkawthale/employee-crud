@@ -1,7 +1,8 @@
 package com.employee.controller;
 
-import com.employee.entity.Employee;
+import com.employee.entity.sql.mysql.Employee;
 import com.employee.service.EmployeeService;
+import com.employee.utils.LogExecutionTime;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,11 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@PostMapping(path = "/save")
+	@LogExecutionTime
 	public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employeeRequest){
 		log.info("save employee: {}", employeeRequest);
-		return new ResponseEntity<>(this.employeeService.saveEmployee(employeeRequest), HttpStatus.CREATED);
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(this.employeeService.saveEmployee(employeeRequest));
 	}
 
 	@PostMapping(path = "/saveAll")
@@ -41,6 +44,7 @@ public class EmployeeController {
 
 	@GetMapping(path = "/getAll")
 	public ResponseEntity<List<Employee>> getAllEmployees(){
+		///ResponseEntity.
 		return new ResponseEntity<>(this.employeeService.getAllEmployee(), HttpStatus.OK);
 	}
 

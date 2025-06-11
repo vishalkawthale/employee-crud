@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  labels:
+    app: employee-crud
+    version: v1
+    deploymentType: k8s
+  name: employee-crud
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      version: v1
+      deploymentType: k8s
+      app: employee-crud
+  replicas: 2 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: employee-crud
+        version: v1
+        deploymentType: k8s
+    spec:
+      containers:
+        - name: employee-crud # Name of the container
+          image: vkawthale/employee-crud # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
+
+
+---
+
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: springboot-k8ssvc
+  namespace: default
+spec:
+  selector:
+    app: employee-crud
+  minReplicas: 1
+  maxReplicas: 1
+  ports:
+    - protocol: "TCP"
+      port: 8080 # The port that the service is running on in the cluster
+      targetPort: 8080 # The port exposed by the service
+  type: NodePort # type of the service.

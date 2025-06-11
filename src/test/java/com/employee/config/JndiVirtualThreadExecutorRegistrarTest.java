@@ -2,7 +2,7 @@
 package com.employee.config;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestDemo;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -43,7 +43,7 @@ public class JndiVirtualThreadExecutorRegistrarTest {
         registrar.setApplicationContext(applicationContext);
     }
 
-    @Test
+    @TestDemo
     public void testRegisterVirtualThreadExecutorWithJndi_Success() throws Exception {
         when(applicationContext.getBean("virtualThreadExecutor", ExecutorService.class)).thenReturn(virtualThreadExecutor);
         when(applicationContext.getBean("virtualThreadFactory", ThreadFactory.class)).thenReturn(virtualThreadFactory);
@@ -59,7 +59,7 @@ public class JndiVirtualThreadExecutorRegistrarTest {
         verify(jndiTemplate).bind("virtualThreadFactory", virtualThreadFactory);
     }
 
-    @Test
+    @TestDemo
     public void testRegisterVirtualThreadExecutorWithJndi_NamingException() throws Exception {
         when(applicationContext.getBean("virtualThreadExecutor", ExecutorService.class)).thenReturn(virtualThreadExecutor);
         when(applicationContext.getBean("virtualThreadFactory", ThreadFactory.class)).thenReturn(virtualThreadFactory);

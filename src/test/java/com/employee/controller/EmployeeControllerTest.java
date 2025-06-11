@@ -1,7 +1,7 @@
 package com.employee.controller;
 
 import com.employee.config.GlobalExceptionHandler;
-import com.employee.entity.Employee;
+import com.employee.entity.sql.mysql.Employee;
 import com.employee.service.EmployeeService;
 import com.employee.utils.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

@@ -1,14 +1,16 @@
 package com.employee.service;
 
-import com.employee.entity.Employee;
-import com.employee.repository.EmployeeRepository;
+import com.employee.entity.sql.mysql.Employee;
+import com.employee.repository.sql.mysql.EmployeeRepository;
+import com.employee.utils.LogExecutionTime;
 import com.employee.utils.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -19,12 +21,18 @@ public class EmployeeService {
     @Autowired
 	private EmployeeRepository employeeRepository;
 
+	@LogExecutionTime
 	public Employee saveEmployee(Employee employee) {
+		employee.setCreatedAt(Timestamp.from(Instant.now()));
 		return this.employeeRepository.save(employee);
 	}
 
 	public List<Employee> getAllEmployee() {
 		return this.employeeRepository.findAll();
+	}
+
+	public List<Employee> getAllEmployeeByIds(List<Integer> ids) {
+		return this.employeeRepository.findAllById(ids);
 	}
 
 	public void deleteEmployee(Integer id) {
@@ -40,6 +48,7 @@ public class EmployeeService {
 		employeeToUpdate.setFirstName(employee.getFirstName());
 		employeeToUpdate.setLastName(employee.getLastName());
 		employeeToUpdate.setAddress(employee.getAddress());
+		employeeToUpdate.setUpdatedAt(Timestamp.from(Instant.now()));
 		return this.employeeRepository.save(employeeToUpdate);
 	}
 	

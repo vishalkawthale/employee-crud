@@ -1,0 +1,38 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: employee-crud
+  security:
+    user:
+      name: vishal
+      password: 123423
+  threads:
+    virtual:
+      enabled: true
+  data:
+    mongodb:
+      authentication-database: admin
+      host: localhost
+      port: 27017
+      database: student_db
+      username: root
+      password: root
+  datasource:
+    mysql:
+      url: jdbc:mysql://localhost:3306/db
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    postgres:
+      url: jdbc:postgresql://localhost:5432/db
+      username: root
+      password: root
+      driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      format_sql: true
+    show-sql: true

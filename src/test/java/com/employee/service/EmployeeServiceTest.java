@@ -1,7 +1,7 @@
 package com.employee.service;
 
-import com.employee.entity.Employee;
-import com.employee.repository.EmployeeRepository;
+import com.employee.entity.sql.mysql.Employee;
+import com.employee.repository.sql.mysql.EmployeeRepository;
 import com.employee.utils.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

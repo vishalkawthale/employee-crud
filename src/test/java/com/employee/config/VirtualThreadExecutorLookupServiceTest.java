@@ -5,7 +5,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestDemo;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -35,7 +35,7 @@ public class VirtualThreadExecutorLookupServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
+    @TestDemo
     public void testRegisterVirtualThreadExecutorWithJndi() throws NamingException {
         doNothing().when(jndiTemplate).bind("virtualThreadExecutor", virtualThreadExecutor);
         doNothing().when(jndiTemplate).bind("virtualThreadFactory", virtualThreadFactory);
@@ -46,7 +46,7 @@ public class VirtualThreadExecutorLookupServiceTest {
         verify(jndiTemplate).bind("virtualThreadFactory", virtualThreadFactory);
     }
 
-    @Test
+    @TestDemo
     public void testGetVirtualThreadExecutorFromJndi() throws NamingException {
         when(jndiTemplate.lookup("virtualThreadExecutor", ExecutorService.class)).thenReturn(virtualThreadExecutor);
 
@@ -55,7 +55,7 @@ public class VirtualThreadExecutorLookupServiceTest {
         assertEquals(virtualThreadExecutor, result);
     }
 
-    @Test
+    @TestDemo
     public void testGetVirtualThreadFactoryFromJndi() throws NamingException {
         when(jndiTemplate.lookup("virtualThreadFactory", ThreadFactory.class)).thenReturn(virtualThreadFactory);
 
@@ -64,7 +64,7 @@ public class VirtualThreadExecutorLookupServiceTest {
         assertEquals(virtualThreadFactory, result);
     }
 
-    @Test
+    @TestDemo
     public void testGetInitialContext() throws NamingException {
         Context context = mock(Context.class);
         when(jndiTemplate.getContext()).thenReturn(context);

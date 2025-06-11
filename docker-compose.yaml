@@ -35,3 +35,94 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: kafka:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+  redis-insight:
+    container_name: redis-insight
+    image: redis/redisinsight:latest
+    ports:
+      - "5540:5540"
+    restart: always
+    volumes:
+      - redis-insight-data:/db
+    depends_on:
+      - redis
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+    ports:
+        - "3306:3306"
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: student_db
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - 27017:27017
+
+  prometheus:
+    image: prom/prometheus:v2.35.0
+    network_mode: host
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - prometheus-data/data/prometheus/config:/etc/prometheus/
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    network_mode: host
+    container_name: grafana
+    restart: unless-stopped
+    user: root
+    ports:
+      - 3000:3000 # access grafana url
+    volumes:
+      - grafana-data/data/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_DOMAIN=localhost
+      # Enabled for logging
+      - GF_LOG_MODE=console file
+      - GF_LOG_FILTERS=alerting.notifier.slack:debug alertmanager:debug ngalert:debug
+
+volumes:
+  redis-data:
+  redis-insight-data:
+  mysql-data:
+  postgres-data:
+  mongo-data:
+  grafana-data:
+  prometheus-data:
